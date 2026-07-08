@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
     <nav class="navbar">
         <a href="/">Home</a>
@@ -15,16 +17,33 @@
 
     <div class="container">
         <h1 class="page-title">{{title}}</h1>
-        
-        <div class="card-grid">
+
+        <form action="/project" method="post">
+            <input type="text" name="projectName" placeholder="Project Name" required>
+            <textarea name="projectDescription" placeholder="Deskripsi Project" rows="3" required></textarea>
+            <select name="projectStatus">
+                <option value="Dalam Proses">Dalam Proses</option>
+                <option value="Selesai">Selesai</option>
+            </select>
+            <button type="submit">Add Project</button>
+        </form>
+
+        <div class="tech-grid">
             {{#each projects}}
-            <div class="card">
-                <h3>{{this.name}}</h3>
-                <p>{{this.description}}</p>
-                <span class="badge {{this.statusColor}}">{{this.status}}</span>
+            <div class="tech-card">
+                <h3>
+                    <a href="/project/{{id}}">{{name}}</a>
+                </h3>
+                <p>{{description}}</p>
+                <span class="badge {{statusColor}}">{{status}}</span>
+
+                <form action="/project/{{id}}/delete" method="post" class="delete-form">
+                    <button type="submit" class="btn-delete">Hapus</button>
+                </form>
             </div>
             {{/each}}
         </div>
     </div>
 </body>
+
 </html>

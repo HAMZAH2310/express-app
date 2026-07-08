@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="/project">My Project</a>
+        <a href="/contact">Contact</a>
+    </nav>
+
+    <div class="container">
+        <a href="/project">&larr; Kembali ke Daftar Proyek</a>
+
+        <h1 class="page-title">{{project.name}}</h1>
+        <span class="badge {{project.statusColor}}">{{project.status}}</span>
+        <p class="lead-text">{{project.description}}</p>
+
+        <hr class="section-divider">
+
+        <h2 class="section-title">Edit Proyek</h2>
+        <form action="/project/{{project.id}}/edit" method="post">
+            <input type="text" name="name" value="{{project.name}}" required>
+            <textarea name="description" rows="4" required>{{project.description}}</textarea>
+            <select name="status">
+                <option value="Dalam Proses" {{#if (eq project.status "Dalam Proses" )}}selected{{/if}}>Dalam Proses
+                </option>
+                <option value="Selesai" {{#if (eq project.status "Selesai" )}}selected{{/if}}>Selesai</option>
+            </select>
+            <button type="submit">Simpan Perubahan</button>
+        </form>
+
+        <form action="/project/{{project.id}}/delete" method="post" class="delete-form">
+            <button type="submit" class="btn-delete">Hapus Proyek Ini</button>
+        </form>
+    </div>
+</body>
+
+</html>
