@@ -18,20 +18,19 @@
     <div class="container">
         <a href="/project">&larr; Kembali ke Daftar Proyek</a>
 
-        <h1 class="page-title">{{project.name}}</h1>
-        <span class="badge {{project.statusColor}}">{{project.status}}</span>
+        <h1 class="page-title">{{project.title}}</h1>
+        <span class="badge badge-{{project.statusColor}}">{{project.status}}</span>
         <p class="lead-text">{{project.description}}</p>
 
         <hr class="section-divider">
 
         <h2 class="section-title">Edit Proyek</h2>
         <form action="/project/{{project.id}}/edit" method="post">
-            <input type="text" name="name" value="{{project.name}}" required>
-            <textarea name="description" rows="4" required>{{project.description}}</textarea>
-            <select name="status">
-                <option value="Dalam Proses" {{#if (eq project.status "Dalam Proses" )}}selected{{/if}}>Dalam Proses
-                </option>
-                <option value="Selesai" {{#if (eq project.status "Selesai" )}}selected{{/if}}>Selesai</option>
+            <input type="text" name="projectName" value="{{project.title}}" required>
+            <textarea name="projectDescription" rows="4" required>{{project.description}}</textarea>
+            <select name="projectStatus">
+                <option value="in_progress" {{#if (eq project.status "in_progress")}}selected{{/if}}>Dalam Proses</option>
+                <option value="completed" {{#if (eq project.status "completed")}}selected{{/if}}>Selesai</option>
             </select>
             <button type="submit">Simpan Perubahan</button>
         </form>

@@ -16,14 +16,21 @@
     </nav>
 
     <div class="container">
+
+        {{#if flash}}
+            <div class="alert alert-{{flash.type}}">
+                {{flash.message}}
+            </div>
+        {{/if}}
+
         <h1 class="page-title">{{title}}</h1>
 
         <form action="/project" method="post">
             <input type="text" name="projectName" placeholder="Project Name" required>
             <textarea name="projectDescription" placeholder="Deskripsi Project" rows="3" required></textarea>
             <select name="projectStatus">
-                <option value="Dalam Proses">Dalam Proses</option>
-                <option value="Selesai">Selesai</option>
+                <option value="in_progress">Dalam Proses</option>
+                <option value="completed">Selesai</option>
             </select>
             <button type="submit">Add Project</button>
         </form>
@@ -32,10 +39,14 @@
             {{#each projects}}
             <div class="tech-card">
                 <h3>
-                    <a href="/project/{{id}}">{{name}}</a>
+                    <a href="/project/{{id}}">{{title}}</a>
                 </h3>
                 <p>{{description}}</p>
-                <span class="badge {{statusColor}}">{{status}}</span>
+                <span class="badge badge-{{statusColor}}">
+                    {{#if (eq status "completed")}}Selesai{{else}}Dalam Proses{{/if}}
+                </span>
+
+                <a href="/project/{{id}}/edit" class="btn-edit">Edit</a>
 
                 <form action="/project/{{id}}/delete" method="post" class="delete-form">
                     <button type="submit" class="btn-delete">Hapus</button>
